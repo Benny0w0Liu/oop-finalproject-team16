@@ -1,0 +1,11 @@
+[project]
+name = "gymnasium-project"
+version = "0.1.0"
+description = "OOP group project Gymnasium environment"
+authors = [
+  { name = "Benny", email = "bennyliu9005@gmail.com" }
+]
+
+[build-system]
+requires = ["setuptools","wheel"]
+build-backend = "setuptools.build_meta"
