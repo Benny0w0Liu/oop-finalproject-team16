@@ -26,10 +26,10 @@ group member:
     * ```python -m venv .venv```
 
 3. Activate the virtual environment
-    * ```.venv/bin/activate```
+    * ```.\.venv\Scripts\activate```
 
 4. Navigate to the Gymnasium directory
-    * ```cd group_project/Gymnasium```
+    * ```cd Gymnasium```
 5. Install Gymnasium in editable mode
     * ```pip install -e .```
 
@@ -64,8 +64,25 @@ group member:
         typing_extensions    4.15.0
         ```
 # run the virtual environment & the programs
-1. enter virtual environment:  `.venv/bin/activate`
+1. enter virtual environment:  `.\.venv\Scripts\activate`
 2. go to part you want, for example: `cd part1`
 3. [!!! instruction to run the code !!!](https://github.com/ccslab1/Group-Project?tab=readme-ov-file#-running-the-project)
 4. to leave virtual environment: `deactivate`
 
+# part 2
+Run the Frozen Lake: `python frozen_lake.py`
+* Goal:
+    * Revise the sample code to achieve a **consistent success rate > 0.70** on **without
+    changing**: `num_episodes`and `max_steps_per_episode`
+    * You may **only tune**: ‘min_exploration_rate (currently is 0)’ and ‘epsilon_decay_rate’
+* You should demonstrate the agent’s performance.
+    1. **Train** with your tuned exploration settings (no change to episodes/steps).
+    2. **Evaluate** success rate over a **fixed evaluation run** (e.g., 500–1000 test episodes at ε≈0).
+    3. **Report**:
+        - Final **success rate** (wins/episodes)
+        - a short **moving-average curve** over training episodes
+* **Success definition:** An episode counts as success if it reaches the goal (Gymnasium returns
+    reward `1.0` at termination).
+* Keys:
+    * env = gym.make("FrozenLake-v1", render_mode="ansi")
+    * print(env.render())
