@@ -9,7 +9,7 @@ def print_success_rate(rewards_per_episode):
     total_episodes = len(rewards_per_episode)
     success_count = int(np.sum(rewards_per_episode))
     success_rate = (success_count / total_episodes) * 100.0
-    print(f"✅ Success Rate: {success_rate:.2f}% ({success_count} / {total_episodes} episodes)")
+    print(f"Success Rate: {success_rate:.2f}% ({success_count} / {total_episodes} episodes)")
 
 
 def run(episodes,

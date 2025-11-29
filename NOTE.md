@@ -74,7 +74,7 @@ Run the Frozen Lake: `python frozen_lake.py`
 * Goal:
     * Revise the sample code to achieve a **consistent success rate > 0.70** on **without
     changing**: `num_episodes`and `max_steps_per_episode`
-    * You may **only tune**: ‘min_exploration_rate (currently is 0)’ and ‘epsilon_decay_rate’
+    * You may tune: ‘min_exploration_rate (currently is 0)’ and ‘epsilon_decay_rate’ or other parameters and modify the algorithm to achieve the goal.
 * You should demonstrate the agent’s performance.
     1. **Train** with your tuned exploration settings (no change to episodes/steps).
     2. **Evaluate** success rate over a **fixed evaluation run** (e.g., 500–1000 test episodes at ε≈0).
