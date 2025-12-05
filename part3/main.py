@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 import pygame
+import math
 
 pygame.init()
 
@@ -41,19 +42,24 @@ class Archer(ElementBasicInfo):
         screen.blit(self.img,self.position)
         return
 class Bow(ElementBasicInfo):
-    def __init__(self, img_path, size, position=(50,300)):
-        self.angle=0
-        self.frame=0
+    def __init__(self, img_path, size, position=(-100,150)):
         self.img_path=img_path
         self.position=position
         self.size=size
-        self.img=pygame.transform.scale(pygame.image.load(self.img_path[self.frame]).convert_alpha(),self.size)
+        self.img=pygame.transform.scale(pygame.image.load(self.img_path[0]).convert_alpha(),self.size)
+        self.img_rotate=self.img.copy()
+        self.angle=0
         return
     def display(self):
-        screen.blit(self.img,self.position)
+        screen.blit(self.img_rotate,self.position)
         return
-    def set_rotation(self):
-
+    def set_rotation(self, angle):
+        self.angle=angle
+        self.img_rotate=pygame.transform.rotate(self.img, self.angle)
+        x=self.position[0]+160+160*math.cos(math.radians(-angle))
+        y=self.position[1]+60+160*math.sin(math.radians(-angle))
+        self.position=self.img_rotate.get_rect(center=(x,y))
+        #self.rect=self.img_rotate.get_rect(midleft=self.pivot_posi)
         return
     def set_image(self, frame):
         self.frame=frame
@@ -83,18 +89,16 @@ background = Field(img_path=[r".\sprites\field.png"],size=(800,450))
 bow = Bow(img_path=[r".\sprites\none_draw_bow.png",
                     r".\sprites\half_draw_bow.png",
                     r".\sprites\full_draw_bow.png"],
-                    size=(160,120))
-pigeon = Pigeon(img_path=[r".\sprites\pigeon_up.png",
-                          r".\sprites\pigeon_down.png"],
-                          size=(80,80))
+                    size=(320,120))
+
+bow.set_image(2)
 # archer_img  = pygame.transform.scale(pygame.image.load(archer.img_path).convert_alpha(),archer.size)
 # background_img = pygame.transform.scale(pygame.image.load(background.img_path).convert_alpha(),background.size)
 
 # Initialize Pygame
 pygame.init()
 
-frame_counter = 0
-pigeon_ani_speed = 15 
+import time
 
 running = True
 while running:
@@ -110,6 +114,7 @@ while running:
     # Fill background
     background.display()
     archer.display()
+    bow.set_rotation(30)
     bow.display()
     pigeon.display()
 
@@ -118,6 +123,7 @@ while running:
 
     # Limit frame rate to 60 FPS
     clock.tick(60)
+    time.sleep(1)
 
 # Quit Pygame
 pygame.quit()
