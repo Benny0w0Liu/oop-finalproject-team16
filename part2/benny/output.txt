@@ -1,31 +1,20 @@
-Training...
-Episode 1000: Epsilon = 0.9500
-Episode 2000: Epsilon = 0.9001
-Episode 3000: Epsilon = 0.8500
-Episode 4000: Epsilon = 0.8001
-Episode 5000: Epsilon = 0.7500
-Episode 6000: Epsilon = 0.7001
-Episode 7000: Epsilon = 0.6501
-Episode 8000: Epsilon = 0.6000
-Episode 9000: Epsilon = 0.5500
-Episode 10000: Epsilon = 0.5000
-Episode 11000: Epsilon = 0.4500
-Episode 12000: Epsilon = 0.4001
-Episode 13000: Epsilon = 0.3500
-Episode 14000: Epsilon = 0.3001
-Episode 15000: Epsilon = 0.2500
-Episode 16000: Epsilon = 0.2000
-Episode 17000: Epsilon = 0.1501
-Episode 18000: Epsilon = 0.1000
-Episode 19000: Epsilon = 0.0501
-Episode 20000: Epsilon = 0.0100
-Episode 21000: Epsilon = 0.0100
-Episode 22000: Epsilon = 0.0100
-Episode 23000: Epsilon = 0.0100
-Episode 24000: Epsilon = 0.0100
-Episode 25000: Epsilon = 0.0100
-Success Rate: 9.73% (2433 / 25000 episodes)
-Training finished. Model saved to frozen_lake8x8.pkl
-Learning curve saved to frozen_lake8x8.png
-Evaluating...
-Success Rate: 54.20% (542 / 1000 episodes)
+Starting Training...
+Episode 1000: Epsilon 0.9167, Alpha 0.4468, Last 100 avg reward: 0.00
+Episode 2000: Epsilon 0.8333, Alpha 0.2218, Last 100 avg reward: 0.00
+Episode 3000: Epsilon 0.7500, Alpha 0.1101, Last 100 avg reward: 0.01
+Episode 4000: Epsilon 0.6667, Alpha 0.0547, Last 100 avg reward: 0.02
+Episode 5000: Epsilon 0.5833, Alpha 0.0271, Last 100 avg reward: 0.01
+Episode 6000: Epsilon 0.5000, Alpha 0.0135, Last 100 avg reward: 0.04
+Episode 7000: Epsilon 0.4167, Alpha 0.0100, Last 100 avg reward: 0.07
+Episode 8000: Epsilon 0.3333, Alpha 0.0100, Last 100 avg reward: 0.14
+Episode 9000: Epsilon 0.2500, Alpha 0.0100, Last 100 avg reward: 0.22
+Episode 10000: Epsilon 0.1667, Alpha 0.0100, Last 100 avg reward: 0.29
+Episode 11000: Epsilon 0.0833, Alpha 0.0100, Last 100 avg reward: 0.40
+Episode 12000: Epsilon 0.0000, Alpha 0.0100, Last 100 avg reward: 0.53
+Episode 13000: Epsilon 0.0000, Alpha 0.0100, Last 100 avg reward: 0.58
+Episode 14000: Epsilon 0.0000, Alpha 0.0100, Last 100 avg reward: 0.63
+Episode 15000: Epsilon 0.0000, Alpha 0.0100, Last 100 avg reward: 0.59
+Training finished and Q-table saved.
+
+Starting Evaluation...
+Evaluation Success Rate: 54.10% (541 / 1000 episodes)
