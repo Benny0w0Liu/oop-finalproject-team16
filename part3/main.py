@@ -57,11 +57,11 @@ class Bow(ElementBasicInfo):
     def set_image(self, frame):
         self.img=pygame.transform.scale(pygame.image.load(self.img_path[frame]).convert_alpha(),self.size)
         return
-archer = Archer(img_path=[r"D:\Github\114-1-OOP-group-project\part3\sprites\archer.png"],size=(100,100))
-background = Field(img_path=[r"D:\Github\114-1-OOP-group-project\part3\sprites\field.png"],size=(800,450))
-bow = Bow(img_path=[r"D:\Github\114-1-OOP-group-project\part3\sprites\none_draw_bow.png",
-                    r"D:\Github\114-1-OOP-group-project\part3\sprites\half_draw_bow.png",
-                    r"D:\Github\114-1-OOP-group-project\part3\sprites\full_draw_bow.png"],
+archer = Archer(img_path=[r".\sprites\archer.png"],size=(100,100))
+background = Field(img_path=[r".\sprites\field.png"],size=(800,450))
+bow = Bow(img_path=[r".\sprites\none_draw_bow.png",
+                    r".\sprites\half_draw_bow.png",
+                    r".\sprites\full_draw_bow.png"],
                     size=(160,120))
 
 bow.set_image(2)
