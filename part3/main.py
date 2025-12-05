@@ -42,9 +42,10 @@ class Archer(ElementBasicInfo):
         screen.blit(self.img,self.position)
         return
 class Bow(ElementBasicInfo):
-    def __init__(self, img_path, size, position=(-100,150)):
+    def __init__(self, img_path, size, position=(130,360)):
         self.img_path=img_path
         self.position=position
+        self.none_rotate_position=position
         self.size=size
         self.img=pygame.transform.scale(pygame.image.load(self.img_path[0]).convert_alpha(),self.size)
         self.img_rotate=self.img.copy()
@@ -56,10 +57,9 @@ class Bow(ElementBasicInfo):
     def set_rotation(self, angle):
         self.angle=angle
         self.img_rotate=pygame.transform.rotate(self.img, self.angle)
-        x=self.position[0]+160+160*math.cos(math.radians(-angle))
-        y=self.position[1]+60+160*math.sin(math.radians(-angle))
+        x=self.none_rotate_position[0]/2+math.cos(math.radians(-angle))
+        y=self.none_rotate_position[1]+math.sin(math.radians(-angle))
         self.position=self.img_rotate.get_rect(center=(x,y))
-        #self.rect=self.img_rotate.get_rect(midleft=self.pivot_posi)
         return
     def set_image(self, frame):
         self.frame=frame
@@ -90,16 +90,19 @@ bow = Bow(img_path=[r".\sprites\none_draw_bow.png",
                     r".\sprites\half_draw_bow.png",
                     r".\sprites\full_draw_bow.png"],
                     size=(320,120))
-
-bow.set_image(2)
+pigeon = Pigeon(img_path=[r".\sprites\pigeon_up.png",
+                          r".\sprites\pigeon_down.png"],
+                          size=(80,80))
+bow.set_image(0)
 # archer_img  = pygame.transform.scale(pygame.image.load(archer.img_path).convert_alpha(),archer.size)
 # background_img = pygame.transform.scale(pygame.image.load(background.img_path).convert_alpha(),background.size)
 
 # Initialize Pygame
 pygame.init()
+frame_counter = 0
+pigeon_ani_speed = 15 
 
-import time
-
+bow_angle=0
 running = True
 while running:
     for event in pygame.event.get():
@@ -114,7 +117,6 @@ while running:
     # Fill background
     background.display()
     archer.display()
-    bow.set_rotation(30)
     bow.display()
     pigeon.display()
 
@@ -123,7 +125,8 @@ while running:
 
     # Limit frame rate to 60 FPS
     clock.tick(60)
-    time.sleep(1)
+    bow_angle+=1
+    bow.set_rotation(bow_angle)
 
 # Quit Pygame
 pygame.quit()
