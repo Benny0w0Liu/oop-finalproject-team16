@@ -57,14 +57,29 @@ class Bow(ElementBasicInfo):
     def set_image(self, frame):
         self.img=pygame.transform.scale(pygame.image.load(self.img_path[frame]).convert_alpha(),self.size)
         return
+class Pigeon(ElementBasicInfo):
+    def __init__(self, img_path, size, position=(600,200),frame=0):
+        self.img_path=img_path
+        self.position=position
+        self.size=size
+        self.img=pygame.transform.scale(pygame.image.load(self.img_path[0]).convert_alpha(),self.size)
+        self.frame=frame
+        return
+    def display(self):
+        screen.blit(self.img,self.position)
+        return
+    def set_image(self, frame):
+        self.img=pygame.transform.scale(pygame.image.load(self.img_path[frame]).convert_alpha(),self.size)
+        return
 archer = Archer(img_path=[r".\sprites\archer.png"],size=(100,100))
 background = Field(img_path=[r".\sprites\field.png"],size=(800,450))
 bow = Bow(img_path=[r".\sprites\none_draw_bow.png",
                     r".\sprites\half_draw_bow.png",
                     r".\sprites\full_draw_bow.png"],
                     size=(160,120))
-
-bow.set_image(2)
+pigeon = Pigeon(img_path=[r".\sprites\pigeon_up.png",
+                          r".\sprites\pigeon_down.png"],
+                          size=(80,80))
 # archer_img  = pygame.transform.scale(pygame.image.load(archer.img_path).convert_alpha(),archer.size)
 # background_img = pygame.transform.scale(pygame.image.load(background.img_path).convert_alpha(),background.size)
 
@@ -81,6 +96,7 @@ while running:
     background.display()
     archer.display()
     bow.display()
+    pigeon.display()
     # Update display
     pygame.display.flip()
 
