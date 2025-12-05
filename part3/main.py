@@ -51,7 +51,7 @@ class Bow(ElementBasicInfo):
     def display(self):
         screen.blit(self.img,self.position)
         return
-    def set_rotation(self,angle):
+    def set_rotation(self):
 
         return
     def set_image(self, frame):
@@ -64,7 +64,7 @@ bow = Bow(img_path=[r"D:\Github\114-1-OOP-group-project\part3\sprites\none_draw_
                     r"D:\Github\114-1-OOP-group-project\part3\sprites\full_draw_bow.png"],
                     size=(160,120))
 
-
+bow.set_image(2)
 # archer_img  = pygame.transform.scale(pygame.image.load(archer.img_path).convert_alpha(),archer.size)
 # background_img = pygame.transform.scale(pygame.image.load(background.img_path).convert_alpha(),background.size)
 
