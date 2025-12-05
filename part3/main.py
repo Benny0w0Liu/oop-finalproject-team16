@@ -42,11 +42,12 @@ class Archer(ElementBasicInfo):
         return
 class Bow(ElementBasicInfo):
     def __init__(self, img_path, size, position=(50,300)):
+        self.angle=0
+        self.frame=0
         self.img_path=img_path
         self.position=position
         self.size=size
-        self.img=pygame.transform.scale(pygame.image.load(self.img_path[0]).convert_alpha(),self.size)
-        self.angle=0
+        self.img=pygame.transform.scale(pygame.image.load(self.img_path[self.frame]).convert_alpha(),self.size)
         return
     def display(self):
         screen.blit(self.img,self.position)
@@ -55,6 +56,7 @@ class Bow(ElementBasicInfo):
 
         return
     def set_image(self, frame):
+        self.frame=frame
         self.img=pygame.transform.scale(pygame.image.load(self.img_path[frame]).convert_alpha(),self.size)
         return
 archer = Archer(img_path=[r".\sprites\archer.png"],size=(100,100))
