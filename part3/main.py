@@ -73,6 +73,11 @@ class Pigeon(ElementBasicInfo):
     def set_image(self, frame):
         self.img=pygame.transform.scale(pygame.image.load(self.img_path[frame]).convert_alpha(),self.size)
         return
+    def update_animation(self):
+        self.frame = (self.frame + 1) % len(self.img_path)
+        self.set_image(self.frame)
+        return
+
 archer = Archer(img_path=[r".\sprites\archer.png"],size=(100,100))
 background = Field(img_path=[r".\sprites\field.png"],size=(800,450))
 bow = Bow(img_path=[r".\sprites\none_draw_bow.png",
@@ -88,17 +93,26 @@ pigeon = Pigeon(img_path=[r".\sprites\pigeon_up.png",
 # Initialize Pygame
 pygame.init()
 
+frame_counter = 0
+pigeon_ani_speed = 15 
+
 running = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
 
-        # Fill background
+    frame_counter += 1
+    if frame_counter >= pigeon_ani_speed:
+        frame_counter = 0
+        pigeon.update_animation()
+
+    # Fill background
     background.display()
     archer.display()
     bow.display()
     pigeon.display()
+
     # Update display
     pygame.display.flip()
 
