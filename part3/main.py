@@ -14,6 +14,8 @@ GRAVITY_VEC=np.array([0,0.02])
 clock = pygame.time.Clock()
 
 class RenderBasicInfo(ABC):
+    def set_display(self):
+        pass
     def display(self):
         pass
     def set_position(self):
@@ -80,27 +82,27 @@ class Bow(RenderBasicInfo):
 
 # interact element
 class Arrow(RenderBasicInfo, Hitbox):
-    def __init__(self, img_path, size, box_position=np.array([100,100]), box_size=(10,10)):
+    def __init__(self, box_position=np.array([100,100]), box_size=(10,10)):
+        super().__init__(box_position, box_size)
+    def set_display(self, img_path, size):        
         self.img_path=img_path
         self.size=size
         self.img=pygame.transform.scale(pygame.image.load(self.img_path[0]).convert_alpha(),self.size)
         self.img_rotate=self.img.copy()
-        self.angle=0
-        super().__init__(box_position, box_size)
     def display(self, show_box=True):
         if self.box_move_vec[0]==0 and self.box_move_vec[1]>0:
-            self.angle=0
+            angle=0
         elif self.box_move_vec[0]==0:
-            self.angle=180
+            angle=180
         elif self.box_move_vec[0]==0 and self.box_move_vec[1]>0:
-            self.angle=90
+            angle=90
         elif self.box_move_vec[0]==0:
-            self.angle=270
+            angle=270
         else:
-            self.angle=math.degrees(math.atan(self.box_move_vec[1]/self.box_move_vec[0]))
+            angle=math.degrees(math.atan(self.box_move_vec[1]/self.box_move_vec[0]))
         if(self.box_move_vec[0]<0):
-            self.angle+=180
-        self.img_rotate=pygame.transform.rotate(self.img, self.angle)
+            angle+=180
+        self.img_rotate=pygame.transform.rotate(self.img, angle)
         x_sign=int(self.box_move_vec[0] > 0) - int(self.box_move_vec[0] < 0)
         y_sign=int(self.box_move_vec[1] > 0) - int(self.box_move_vec[1] < 0)
         x, y , w, h=self.img_rotate.get_rect(center=(self.box_position[0],HEIGHT-self.box_position[1]))
@@ -114,17 +116,21 @@ class Arrow(RenderBasicInfo, Hitbox):
         return
 
 class Archer(RenderBasicInfo, Hitbox):
-    def __init__(self, img_path, bow ,size ,box_position=np.array([80,70]),box_size=(50,100)):
+    def __init__(self, box_position=np.array([80,70]),box_size=(50,100)):
+        self.aim_angle=0
+        super().__init__(box_position, box_size)
+    def set_display(self, img_path, bow ,size):
         self.img_path=img_path
         self.size=size
         self.img=pygame.transform.scale(pygame.image.load(self.img_path[0]).convert_alpha(),self.size)
         self.bow=bow
-        super().__init__(box_position, box_size)
     def display(self, show_box=True):
         self.bow.set_position((self.box_position[0], HEIGHT-self.box_position[1]-self.size[1]/5))
+        self.bow.set_rotation(self.aim_angle)
         x=self.box_position[0]-self.size[0]/2
         y=HEIGHT-self.box_position[1]-self.size[1]/2
         screen.blit(self.img,(x,y))
+        self.bow.display()
         if show_box:
             pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(self.box_position[0]-self.box_size[0]/2, HEIGHT-self.box_position[1]-self.box_size[1]/2, self.box_size[0], self.box_size[1]),2)
     def set_image(self, frame):
@@ -133,13 +139,14 @@ class Archer(RenderBasicInfo, Hitbox):
         return
 
 class Pigeon(RenderBasicInfo, Hitbox):
-    def __init__(self, img_path, size, box_position=np.array([600,200]), box_size=(60,60),frame=0):
+    def __init__(self, box_position=np.array([600,200]), box_size=(60,60)):
+        super().__init__(box_position, box_size)
+        return
+    def set_display(self,img_path, size, frame=0):
         self.img_path=img_path
         self.size=size
         self.img=pygame.transform.scale(pygame.image.load(self.img_path[0]).convert_alpha(),self.size)
         self.frame=frame
-        super().__init__(box_position, box_size)
-        return
     def display(self,show_box=True):
         if show_box:
             pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(self.box_position[0]-self.box_size[0]/2, HEIGHT-self.box_position[1]-self.box_size[1]/2, self.box_size[0], self.box_size[1]),2)
@@ -156,19 +163,18 @@ class Pigeon(RenderBasicInfo, Hitbox):
         return
 
 background = Field(img_path=[r".\sprites\field.png"],size=(800,450))
-bow = Bow(img_path=[r".\sprites\none_draw_bow.png",
+archer = Archer()
+archer.set_display(img_path=[r".\sprites\archer.png"], 
+                size=(100,100), bow=Bow(img_path=[r".\sprites\none_draw_bow.png",
                     r".\sprites\half_draw_bow.png",
                     r".\sprites\full_draw_bow.png"],
-                    size=(320,120))
-archer = Archer(img_path=[r".\sprites\archer.png"], 
-                size=(100,100), bow=bow)
-
-pigeon = Pigeon(img_path=[r".\sprites\pigeon_up.png",
+                    size=(320,120)))
+pigeon = Pigeon()
+pigeon.set_display(img_path=[r".\sprites\pigeon_up.png",
                           r".\sprites\pigeon_down.png"],
                           size=(80,80))
-arrow = Arrow(img_path=[r".\sprites\arrow.png"],size=(88*2,6))
-
-bow.set_image(0)
+arrow = Arrow()
+arrow.set_display(img_path=[r".\sprites\arrow.png"],size=(88*2,6))
 
 # Initialize Pygame
 pygame.init()
@@ -194,7 +200,6 @@ while running:
     # Fill background
     background.display()
     archer.display()
-    bow.display()
     pigeon.display()
     arrow.display()
     # Update display
@@ -204,10 +209,10 @@ while running:
     clock.tick(60)
 
     #expirement
-    bow_angle+=1
+    archer.aim_angle+=0.5
     pigeon_angle+=0.05
-    bow.set_image(bow_angle%3)
-    bow.set_rotation(bow_angle)
+    # bow.set_image(bow_angle%3)
+    # bow.set_rotation(bow_angle)
     arrow.move(vec=arrow_vec)
     archer.move(vec=archer_vec)
     pigeon.move(vec=pigeon_vec)
