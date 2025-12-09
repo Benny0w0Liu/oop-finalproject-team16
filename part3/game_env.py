@@ -1,23 +1,37 @@
-from abc import ABC, abstractmethod
 import pygame
-import math
 import numpy as np
-from main import Field, Arrow, Archer, Pigeon, Bow
-
+from Archer_Pippy import Field, Arrow, Archer, Pigeon, Bow
+"""
+game environment class
+"""
 class Game:
+    """
+    create the game environment: set render or not
+    """
     def __init__(self, render=True):
-        self.WIDTH, self.HEIGHT = 800, 450
+        # env setting
         self.render=render
+        self.WIDTH, self.HEIGHT = 800, 450
+        self.GRAVITY_VEC = np.array([0,0.02])
+        self.total_frame=1000
+        
+    """
+    reset the game, set all the environment
+    """
     def reset(self):
-        self.archer = Archer()
-        self.pigeon = Pigeon()
+        # env setting
+        self.current_frame=0
+        # character setting
+        self.archer = Archer(self.GRAVITY_VEC, self.HEIGHT, self.WIDTH)
+        self.pigeon = Pigeon(self.HEIGHT, self.WIDTH)
+        # render setting
         if (self.render):            
             pygame.init()
             self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
             pygame.display.set_caption("Archer vs Piggy")
-            clock = pygame.time.Clock()
+            self.clock = pygame.time.Clock()
             self.background = Field(img_path=[r".\sprites\field.png"],size=(800,450))
-            arrow = Arrow()
+            arrow = Arrow(self.GRAVITY_VEC, self.HEIGHT, self.WIDTH)
             arrow.set_display(img_path=[r".\sprites\arrow.png"],size=(88*2,6))
             self.archer.set_display(img_path=[r".\sprites\archer.png"], 
                             size=(100,100), 
@@ -29,89 +43,115 @@ class Game:
             self.pigeon.set_display(img_path=[r".\sprites\pigeon_up.png",
                                     r".\sprites\pigeon_down.png"],
                                     size=(80,80))
-            self.frame_counter = 0
+
             self.pigeon_ani_speed = 15 
-    def next_step(self, archer_move, pigeon_move):
-        
-        observed_data={"archer":[], "pigeon":[]}
+    """
+    update the environment
+    input:  archer_action = {   -> set the archer action
+                "shoot":(bool),                     -> shoot or not
+                "move_angle":(float)                -> new bow angle = old + move_angle
+            }, 
+            pigeon_action = {   -> set the pigeon action
+                "move_vector":(np.array,dim=(2,))   -> new position = old + move_vector
+            }
+    output: observed_data=  {
+                "env":{
+                    "current_frame":(int)           -> current frame number
+                    "game_state":(str)              -> "continue": game keep going
+                                                       "pigeon win": game end, pigeon win
+                                                       "archer win": game end, archer win
+                },
+                "archer":{
+                    "bow_angle":(float),            -> new bow_angle
+                    "left_arrows_num":(int),        -> number of left arrows
+                    "shoot_cd":(int)                -> cd time of shooting
+                }, 
+                "pigeon":{
+                    "position":(np.array,dim=(2,))  -> pigeon's position
+                }, 
+            }
+    """
+    def next_step(  self, 
+                    archer_action={
+                        "shoot":False,
+                        "move_angle":0
+                    }, 
+                    pigeon_action={ "move_vector":np.array([0,0])}
+                 ):
+        #update current_frame
+        self.current_frame+=1
+        #archer and arrows statement
+        if self.archer.shoot_cd==0 and archer_action["shoot"]:
+            self.archer.shoot()
+        self.archer.update_arrows()
+        self.archer.aim_angle+=archer_action["move_angle"]
+        #update pigion statement
+        self.pigeon.move(vec=pigeon_action["move_vector"])
+        #write result of this frame
+        observed_data=  {
+            "env":{
+                "current_frame":self.current_frame,
+                "game_state":"continue"
+            },
+            "archer":{
+                "bow_angle":self.archer.aim_angle, 
+                "left_arrows_num":self.archer.arrow_num-self.archer.current_arrow_index,
+                "shoot_cd":self.archer.shoot_cd
+            }, 
+            "pigeon":{
+                "position":self.pigeon.box_position
+            }
+        }
+        if self.archer.arrows[-1].isOut or self.current_frame>=self.total_frame:
+            observed_data["env"]["game_state"]="pigeon win"
+        archer_win=False
+        for arrow in self.archer.arrows:
+            a=arrow.box_scope()
+            b=self.pigeon.box_scope()
+            if not (a[2]<b[0] or a[0]>b[2] or a[3]<b[1] or a[1]>b[3]):
+                archer_win=True
+                break
+        if archer_win:
+            observed_data["env"]["game_state"]="archer win"
+        #render if True
+        if self.render:
+            self.background.display(self.screen)
+            self.archer.display(self.screen, self.HEIGHT)
+            self.pigeon.display(self.screen, self.HEIGHT)
+            pygame.display.flip()
+            self.clock.tick(60)
         return observed_data
+    """
+    close the game env
+    """
     def close(self):
         if (self.render):
-            print(self.render)
             pygame.quit()
-game = Game(render=False)
+game = Game(render=True)
 game.reset()
-
+i = 0
+while(1):
+    if i%150==0:
+        result=game.next_step(
+            archer_action = {   
+                "shoot":True,                     
+                "move_angle":0.1              
+            }, 
+            pigeon_action = {   
+                "move_vector":np.array([0,0])
+            })
+    else:
+        result=game.next_step(
+            archer_action = {   
+                "shoot":False,                     
+                "move_angle":0.1              
+            }, 
+            pigeon_action = {   
+                "move_vector":np.array([1,1])
+            })
+    print(i, result)
+    if(result["env"]["game_state"]!="continue"):
+        break
+    
+    i+=1
 game.close()
-# pygame.init()
-
-# # Screen dimensions
-# WIDTH, HEIGHT = 800, 450
-# screen = pygame.display.set_mode((WIDTH, HEIGHT))
-# pygame.display.set_caption("Archer vs Piggy")
-# GRAVITY_VEC=np.array([0,0.02])
-# # Clock to control frame rate
-# clock = pygame.time.Clock()
-
-# background = Field(img_path=[r".\sprites\field.png"],size=(800,450))
-# arrow = Arrow()
-# arrow.set_display(img_path=[r".\sprites\arrow.png"],size=(88*2,6))
-# archer = Archer()
-# archer.set_display(img_path=[r".\sprites\archer.png"], 
-#                 size=(100,100), 
-#                 bow_set=Bow(img_path=[r".\sprites\none_draw_bow.png",
-#                     r".\sprites\half_draw_bow.png",
-#                     r".\sprites\full_draw_bow.png"],
-#                     size=(320,120)),
-#                 arrow_set=arrow)
-# pigeon = Pigeon()
-# pigeon.set_display(img_path=[r".\sprites\pigeon_up.png",
-#                           r".\sprites\pigeon_down.png"],
-#                           size=(80,80))
-
-
-# frame_counter = 0
-# pigeon_ani_speed = 15 
-
-# bow_angle=0
-# pigeon_angle=0
-# running = True
-# archer_vec=np.array([1,0])
-# pigeon_vec=np.array([0,0])
-# archer.bow.set_image(2)
-# for i in range(100):
-#     for event in pygame.event.get():
-#         if event.type == pygame.QUIT:
-#             running = False
-
-#     frame_counter += 1
-#     if frame_counter >= pigeon_ani_speed:
-#         frame_counter = 0
-#         pigeon.update_animation()
-
-#     # Fill background
-#     background.display()
-#     archer.display()
-#     pigeon.display()
-#     # arrow.display()
-#     # Update display
-#     pygame.display.flip()
-
-#     # Limit frame rate to 60 FPS
-#     clock.tick(60)
-#     if frame_counter%50==0:
-#         archer.shoot()
-#         print("shoot")
-#     archer.update_arrow()
-#     #expirement
-#     archer.aim_angle+=0.5
-#     pigeon_angle+=0.05
-#     # bow.set_image(bow_angle%3)
-#     # bow.set_rotation(bow_angle)
-#     # archer.move(vec=archer_vec)
-#     pigeon.move(vec=pigeon_vec)
-#     pigeon_vec=np.array([math.cos(pigeon_angle)*5, math.sin(pigeon_angle)*5])
-#     archer_vec=np.array([math.cos(pigeon_angle)*2,0])
-
-# # Quit Pygame
-# pygame.quit()
