@@ -156,10 +156,12 @@ class Archer(RenderBasicInfo, Hitbox):
         if self.current_arrow_index==-1:
             self.current_arrow_index=0
         if(self.current_arrow_index>=0 and self.current_arrow_index<self.arrow_num):
-            x, y=3*math.cos(self.aim_angle), 3*math.sin(self.aim_angle)
-            self.arrows[self.current_arrow_index].set_box(np.array([self.box_position[0],self.box_position[1]+self.size[1]/5]),
-                                                            np.array([x,y]))
-            print(self.current_arrow_index,x,y)
+            vec_x, vec_y=10*math.cos(math.radians(self.aim_angle)), 10*math.sin(math.radians(self.aim_angle))
+            pos_x=self.box_position[0]+88*math.cos(math.radians(self.aim_angle))
+            pos_y=self.box_position[1]+self.size[1]/5+88*math.sin(math.radians(self.aim_angle))
+            self.arrows[self.current_arrow_index].set_box(np.array([pos_x, pos_y]),
+                                                            np.array([vec_x,vec_y]))
+            print(self.current_arrow_index,vec_x,vec_y)
             self.current_arrow_index+=1
         else:
             print("none arrow left")
