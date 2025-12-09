@@ -32,6 +32,7 @@ class Game:
             self.frame_counter = 0
             self.pigeon_ani_speed = 15 
     def next_step(self, archer_move, pigeon_move):
+        
         observed_data={"archer":[], "pigeon":[]}
         return observed_data
     def close(self):
