@@ -33,7 +33,7 @@ class Hitbox:
         return [self.box_position[0]-self.box_size[0]/2, self.box_position[1]-self.box_size[1]/2,
                 self.box_position[0]+self.box_size[0]/2,  self.box_position[1]+self.box_size[1]/2]
     def move(self, vec):
-        self.box_position=self.box_position+vec
+        self.box_position=self.box_position.astype(float)+vec.astype(float)
         self.box_move_vec=vec
         return self.box_position
     def set_box(self, position, vec):
@@ -114,16 +114,29 @@ class Arrow(RenderBasicInfo, Hitbox):
         self.frame=frame
         self.img=pygame.transform.scale(pygame.image.load(self.img_path[frame]).convert_alpha(),self.size)
         return
-
+    def update_vec(self):
+        self.move(self.box_move_vec)
+        self.box_move_vec=self.box_move_vec-GRAVITY_VEC.astype(float)
+        if(self.box_position[0]<=0 or self.box_position[0]>=WIDTH or self.box_position[1]<=0 or self.box_position[1]>=HEIGHT):
+            self.box_move_vec=np.array([0,0])
+            return False
+        return True
 class Archer(RenderBasicInfo, Hitbox):
     def __init__(self, box_position=np.array([80,70]),box_size=(50,100)):
         self.aim_angle=0
+        self.arrow_num=3
+        self.arrows=[Arrow() for _ in range(self.arrow_num)]
+        for arrow in self.arrows:
+            arrow.set_box(np.array([100,10]), np.array([0,0]))
+        self.current_arrow_index=-1
         super().__init__(box_position, box_size)
-    def set_display(self, img_path, bow ,size):
+    def set_display(self, img_path, bow_set, arrow_set,size):
         self.img_path=img_path
         self.size=size
         self.img=pygame.transform.scale(pygame.image.load(self.img_path[0]).convert_alpha(),self.size)
-        self.bow=bow
+        self.bow=bow_set
+        for arrow in self.arrows:
+            arrow.set_display(arrow_set.img_path,arrow_set.size)
     def display(self, show_box=True):
         self.bow.set_position((self.box_position[0], HEIGHT-self.box_position[1]-self.size[1]/5))
         self.bow.set_rotation(self.aim_angle)
@@ -131,12 +144,33 @@ class Archer(RenderBasicInfo, Hitbox):
         y=HEIGHT-self.box_position[1]-self.size[1]/2
         screen.blit(self.img,(x,y))
         self.bow.display()
+        for arrow in self.arrows:
+            arrow.display(show_box)
         if show_box:
             pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(self.box_position[0]-self.box_size[0]/2, HEIGHT-self.box_position[1]-self.box_size[1]/2, self.box_size[0], self.box_size[1]),2)
     def set_image(self, frame):
         self.frame=frame
         self.img=pygame.transform.scale(pygame.image.load(self.img_path[frame]).convert_alpha(),self.size)
         return
+    def shoot(self):
+        if self.current_arrow_index==-1:
+            self.current_arrow_index=0
+        if(self.current_arrow_index>=0 and self.current_arrow_index<self.arrow_num):
+            x, y=3*math.cos(self.aim_angle), 3*math.sin(self.aim_angle)
+            self.arrows[self.current_arrow_index].set_box(np.array([self.box_position[0],self.box_position[1]+self.size[1]/5]),
+                                                            np.array([x,y]))
+            print(self.current_arrow_index,x,y)
+            self.current_arrow_index+=1
+        else:
+            print("none arrow left")
+    def update_arrow(self):
+        if(self.current_arrow_index<0):
+            return
+        i=0
+        for arrow in self.arrows:
+            if(i<=self.current_arrow_index):
+                arrow.update_vec()
+            i+=1
 
 class Pigeon(RenderBasicInfo, Hitbox):
     def __init__(self, box_position=np.array([600,200]), box_size=(60,60)):
@@ -163,18 +197,20 @@ class Pigeon(RenderBasicInfo, Hitbox):
         return
 
 background = Field(img_path=[r".\sprites\field.png"],size=(800,450))
+arrow = Arrow()
+arrow.set_display(img_path=[r".\sprites\arrow.png"],size=(88*2,6))
 archer = Archer()
 archer.set_display(img_path=[r".\sprites\archer.png"], 
-                size=(100,100), bow=Bow(img_path=[r".\sprites\none_draw_bow.png",
+                size=(100,100), 
+                bow_set=Bow(img_path=[r".\sprites\none_draw_bow.png",
                     r".\sprites\half_draw_bow.png",
                     r".\sprites\full_draw_bow.png"],
-                    size=(320,120)))
+                    size=(320,120)),
+                arrow_set=arrow)
 pigeon = Pigeon()
 pigeon.set_display(img_path=[r".\sprites\pigeon_up.png",
                           r".\sprites\pigeon_down.png"],
                           size=(80,80))
-arrow = Arrow()
-arrow.set_display(img_path=[r".\sprites\arrow.png"],size=(88*2,6))
 
 # Initialize Pygame
 pygame.init()
@@ -184,10 +220,10 @@ pigeon_ani_speed = 15
 bow_angle=0
 pigeon_angle=0
 running = True
-arrow_vec=np.array([2,2])
 archer_vec=np.array([1,0])
 pigeon_vec=np.array([0,0])
-while running:
+archer.bow.set_image(2)
+for i in range(100):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -201,24 +237,25 @@ while running:
     background.display()
     archer.display()
     pigeon.display()
-    arrow.display()
+    # arrow.display()
     # Update display
     pygame.display.flip()
 
     # Limit frame rate to 60 FPS
     clock.tick(60)
-
+    if frame_counter%50==0:
+        archer.shoot()
+        print("shoot")
+    archer.update_arrow()
     #expirement
     archer.aim_angle+=0.5
     pigeon_angle+=0.05
     # bow.set_image(bow_angle%3)
     # bow.set_rotation(bow_angle)
-    arrow.move(vec=arrow_vec)
-    archer.move(vec=archer_vec)
+    # archer.move(vec=archer_vec)
     pigeon.move(vec=pigeon_vec)
     pigeon_vec=np.array([math.cos(pigeon_angle)*5, math.sin(pigeon_angle)*5])
     archer_vec=np.array([math.cos(pigeon_angle)*2,0])
-    arrow_vec=arrow_vec-GRAVITY_VEC
 
 # Quit Pygame
 pygame.quit()
