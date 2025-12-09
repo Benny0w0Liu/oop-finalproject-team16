@@ -218,14 +218,17 @@ pigeon.set_display(img_path=[r".\sprites\pigeon_up.png",
 pygame.init()
 frame_counter = 0
 pigeon_ani_speed = 15 
+bow_state = 0
+bow_timer = 200
 
 bow_angle=0
 pigeon_angle=0
 running = True
 archer_vec=np.array([1,0])
 pigeon_vec=np.array([0,0])
-archer.bow.set_image(2)
-for i in range(100):
+archer.bow.set_image(bow_state)
+#for i in range(100):
+while running :
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -245,9 +248,24 @@ for i in range(100):
 
     # Limit frame rate to 60 FPS
     clock.tick(60)
-    if frame_counter%50==0:
+    if bow_timer > 0:
+        bow_timer -= 1
+
+    if bow_state == 0 and bow_timer == 0:
+        bow_state = 1
+        bow_timer = 30
+        archer.bow.set_image(1)
+    elif bow_state == 1 and bow_timer == 0:
+        bow_state = 2
+        bow_timer = 10
+        archer.bow.set_image(2)
+    elif bow_state == 2 and bow_timer == 0:
         archer.shoot()
         print("shoot")
+        bow_state = 0
+        bow_timer = 200
+        archer.bow.set_image(0)
+
     archer.update_arrow()
     #expirement
     archer.aim_angle+=0.5
