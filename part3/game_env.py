@@ -21,6 +21,7 @@ class Game:
     def reset(self):
         # env setting
         self.current_frame=0
+        self.bow_animation_counter=0
         # character setting
         self.archer = Archer(self.GRAVITY_VEC, self.HEIGHT, self.WIDTH)
         self.pigeon = Pigeon(self.HEIGHT, self.WIDTH)
@@ -80,9 +81,28 @@ class Game:
                  ):
         #update current_frame
         self.current_frame+=1
+        
+        # Update bow animation based on counter
+        if self.render:
+            if self.bow_animation_counter < 120 and self.bow_animation_counter != 0:
+                # none_draw_bow (index 0) for first 120 frames
+                self.archer.bow.set_image(0)
+            elif self.bow_animation_counter < 140 and self.bow_animation_counter != 0:
+                # half_draw_bow (index 1) for next 20 frames (120-139)
+                self.archer.bow.set_image(1)
+            elif self.bow_animation_counter < 150 or self.bow_animation_counter == 0:
+                # full_draw_bow (index 2) for last 10 frames (140-149)
+                self.archer.bow.set_image(2)
+        
         #archer and arrows statement
         if self.archer.shoot_cd==0 and archer_action["shoot"]:
             self.archer.shoot()
+            # Reset bow animation counter after shooting
+            self.bow_animation_counter = 0
+        else:
+            # Increment bow animation counter
+            self.bow_animation_counter = (self.bow_animation_counter + 1) % 150
+        
         self.archer.update_arrows()
         self.archer.aim_angle+=archer_action["move_angle"]
         #update pigion statement
