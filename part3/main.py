@@ -3,9 +3,14 @@ import math
 import random
 
 class PigeonAgent:
-    def __init__(self):
-        self.dir=random.choice(["U","D","L","R"])
-        self.spe=random.randint(1,3)
+    def __init__(self, agent_mode):
+        self.agent_mode=agent_mode
+        if(agent_mode=="random_agent"):
+            self.dir=random.choice(["U","D","L","R"])
+            self.spe=random.randint(1,3)
+        else:
+            self.dir="U"
+            self.spe=3
     def up_down_agent(self, last_state):
         if(last_state["pigeon"]["position"][1]>=400.0):
             self.dir="D"
@@ -33,7 +38,13 @@ class PigeonAgent:
                     "direction":self.dir,
                     "speed":self.spe
                 }
-    def learnt_agent(self, last_state):
+    def learnt_agent(self, last_state,train=False):
+        return
+    def agent(self, last_state, train=False):
+        if(self.agent_mode=="up_down_agent"):
+            self.up_down_agent(last_state=last_state)
+        elif(self.agent_mode=="random_agent"):
+            self.random_agent(last_state=last_state)
         return
 class ArcherAgent:
     def __init__(self):
@@ -42,17 +53,19 @@ class ArcherAgent:
         # 學習參數
         self.height_adjustment = 0 
         self.learning_rate = 0.05
-        self.shot_history = []
+        self.shot_history = [] # <- commend
         self.current_shot_data = None 
         self.episode_count = 0
-        
-    def agent(self, last_state):
+    def agent(self, last_state, train=True):
         # Your code here ->
         pigeon_pos = last_state["pigeon"]["position"]  
         bow_angle = last_state["archer"]["bow_angle"]
         shoot_cd = last_state["archer"]["shoot_cd"]
         game_state = last_state["env"]["game_state"]
-        
+        """
+        1. if train is true: build a empty file 
+            else: read the file
+        """
         archer_x = 80
         archer_y = 70
         
@@ -135,33 +148,30 @@ class ArcherAgent:
                 else:
                     # 初期探索階段
                     self.height_adjustment += random.uniform(-15, 15)
-            
+            """
+            2. if train==True: store the file 
+            """
             # 重置當前射擊數據
             self.current_shot_data = None
             self.episode_count += 1
             
-            # 每100個episode輸出學習進度
+            # 每10個episode輸出學習進度
             if self.episode_count % 10 == 0:
                 success_rate = len([h for h in self.shot_history if h['success']]) / max(len(self.shot_history), 1) * 100
-                print(f"Episode {self.episode_count}: Success Rate = {success_rate:.1f}%, Height Adjustment = {self.height_adjustment:.2f}")
-        
+                print(f"Episode {self.episode_count}: Archer Success Rate = {success_rate:.1f}%, Height Adjustment = {self.height_adjustment:.2f}")
+            
         return {
             "shoot": self.shoot,
             "move_angle": self.move_angle
         }
-            
         #<- Your code here
 
-def run(episodes=1, render=True):
+def run(episodes=1, render=True, train=False):
     game = Game(render=render)
-    # 在所有 episodes 外初始化 archerAgent，讓它能累積學習經驗
     archerAgent = ArcherAgent()
-    
+    pigeonAgent = PigeonAgent(agent_mode="random_agent")
     for episode in range(episodes):
         game.reset()
-        # 每個 episode 重新初始化 pigeonAgent
-        pigeonAgent = PigeonAgent()
-        
         # get into 
         while(1):
             
@@ -174,8 +184,8 @@ def run(episodes=1, render=True):
                     "direction": pigeonAgent.dir,
                     "speed": pigeonAgent.spe
                 })
-            pigeonAgent.up_down_agent(result)
-            archerAgent.agent(result)
+            pigeonAgent.agent(result)
+            archerAgent.agent(result, train)
             if(result["env"]["game_state"] != "continue"):
                 break
             # 移除 print 以加快訓練速度
@@ -186,9 +196,9 @@ def run(episodes=1, render=True):
         final_success_rate = len([h for h in archerAgent.shot_history if h['success']]) / len(archerAgent.shot_history) * 100
         print(f"\n=== Training Complete ===")
         print(f"Total Episodes: {archerAgent.episode_count}")
-        print(f"Final Success Rate (last 100): {final_success_rate:.1f}%")
-        print(f"Optimal Height Adjustment: {archerAgent.height_adjustment:.2f}")
+        print(f"Final Archer Success Rate (last 100): {final_success_rate:.1f}%")
     
     game.close()
 
-run(episodes=1000, render=False)
+run(episodes=1000, render=False, train=True)
+run(episodes=10, render=True, train=False)
