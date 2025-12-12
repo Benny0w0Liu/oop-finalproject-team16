@@ -53,7 +53,7 @@ class Game:
                 "move_angle":(float)                -> new bow angle = old + move_angle
             }, 
             pigeon_action = {   -> set the pigeon action
-                "move_vector":(np.array,dim=(2,))   -> new position = old + move_vector
+                "move_vector":(str)   -> direction 'L': left, 'R': right, 'U': up, 'D': down
             }
     output: observed_data=  {
                 "env":{
