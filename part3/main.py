@@ -4,15 +4,37 @@ import random
 
 class PigeonAgent:
     def __init__(self):
-        self.dir="U"
+        self.dir=random.choice(["U","D","L","R"])
+        self.spe=random.randint(1,3)
     def up_down_agent(self, last_state):
         if(last_state["pigeon"]["position"][1]>=400.0):
             self.dir="D"
         elif(last_state["pigeon"]["position"][1]<=200.0):
             self.dir="U"
+        # if(last_state["pigeon"]["position"][0]>=500.0):
+        #     self.dir="L"
+        # elif(last_state["pigeon"]["position"][0]<=300.0):
+        #     self.dir="R"        
+    def random_agent(self, last_state):
+        pos_x=last_state["pigeon"]["position"][0]
+        pos_y=last_state["pigeon"]["position"][1]
+        if(pos_x>=620.0):
+            self.dir="L"
+        elif(pos_x<=300.0):
+            self.dir="R"
+        elif(pos_y>=400.0):
+            self.dir="D"
+        elif(pos_y<=200.0):
+            self.dir="U"
+        else:
+            if random.random()<0.3:
+                self.dir=random.choice(["U","D","L","R"])
         return {   
-                    "direction":self.dir
+                    "direction":self.dir,
+                    "speed":self.spe
                 }
+    def learnt_agent(self, last_state):
+        return
 class ArcherAgent:
     def __init__(self):
         self.shoot = True
@@ -45,7 +67,7 @@ class ArcherAgent:
         
         # 預測鴿子未來位置
         # 鴿子速度為3，根據當前位置判斷移動方向
-        pigeon_speed = 3
+        pigeon_speed = 2
         if pigeon_pos[1] >= 400:
             # 鴿子在頂部，會往下移動
             predicted_movement = -pigeon_speed * estimated_time
@@ -142,13 +164,15 @@ def run(episodes=1, render=True):
         
         # get into 
         while(1):
+            
             result = game.next_step(
                 archer_action = {   
                     "shoot": archerAgent.shoot,                     
                     "move_angle": archerAgent.move_angle           
                 }, 
                 pigeon_action = {   
-                    "direction": pigeonAgent.dir
+                    "direction": pigeonAgent.dir,
+                    "speed": pigeonAgent.spe
                 })
             pigeonAgent.up_down_agent(result)
             archerAgent.agent(result)
@@ -167,4 +191,4 @@ def run(episodes=1, render=True):
     
     game.close()
 
-run(episodes=1000, render=True)
+run(episodes=1000, render=False)

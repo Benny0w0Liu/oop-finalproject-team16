@@ -1,4 +1,5 @@
 import pygame
+import random
 import numpy as np
 from Archer_Pippy import Field, Arrow, Archer, Pigeon, Bow
 """
@@ -78,7 +79,8 @@ class Game:
                         "move_angle":0
                     }, 
                     pigeon_action={ 
-                        "direction":"None"               
+                        "direction":"None",
+                        "speed":"None"               
                     }
                  ):
         #update current_frame
@@ -97,7 +99,7 @@ class Game:
         self.archer.update_arrows()
         self.archer.aim_angle+=archer_action["move_angle"]
         #update pigion statement
-        pigeon_speed=3
+        pigeon_speed=pigeon_action["speed"]
         if pigeon_action["direction"]=="L":
             pigeon_action["move_vector"]=np.array([-pigeon_speed,0])
         elif pigeon_action["direction"]=="R":
