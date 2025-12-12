@@ -114,6 +114,7 @@ class Arrow(RenderBasicInfo, Hitbox):
         self.isOut = not self.move(self.box_move_vec)
         if self.isOut!= True:
             self.box_move_vec=self.box_move_vec-self.GRAVITY_VEC.astype(float)
+        #else: print("Arrow out of bounds: ", self.box_position)
         return True
 class Archer(RenderBasicInfo, Hitbox):
     def __init__(self, GRAVITY_VEC, HEIGHT, WIDTH, box_position=np.array([80,70]),box_size=(50,100)):
