@@ -13,7 +13,7 @@ class Game:
         self.render=render
         self.WIDTH, self.HEIGHT = 800, 450
         self.GRAVITY_VEC = np.array([0,0.02])
-        self.total_frame=1000
+        self.total_frame=200
         
     """
     reset the game, set all the environment
@@ -24,7 +24,7 @@ class Game:
         self.bow_animation_counter=0
         # character setting
         self.archer = Archer(self.GRAVITY_VEC, self.HEIGHT, self.WIDTH)
-        self.pigeon = Pigeon(self.HEIGHT, self.WIDTH)
+        self.pigeon = Pigeon(self.HEIGHT, self.WIDTH,np.array([600,300]))
         # render setting
         if (self.render):            
             pygame.init()
@@ -77,22 +77,12 @@ class Game:
                         "shoot":False,
                         "move_angle":0
                     }, 
-                    pigeon_action={ "move_vector":np.array([0,0])}
+                    pigeon_action={ 
+                        "direction":"None"               
+                    }
                  ):
         #update current_frame
         self.current_frame+=1
-        
-        # Update bow animation based on counter
-        if self.render:
-            if self.bow_animation_counter < 120 and self.bow_animation_counter != 0:
-                # none_draw_bow (index 0) for first 120 frames
-                self.archer.bow.set_image(0)
-            elif self.bow_animation_counter < 140 and self.bow_animation_counter != 0:
-                # half_draw_bow (index 1) for next 20 frames (120-139)
-                self.archer.bow.set_image(1)
-            elif self.bow_animation_counter < 150 or self.bow_animation_counter == 0:
-                # full_draw_bow (index 2) for last 10 frames (140-149)
-                self.archer.bow.set_image(2)
         
         #archer and arrows statement
         if self.archer.shoot_cd==0 and archer_action["shoot"]:
@@ -101,11 +91,21 @@ class Game:
             self.bow_animation_counter = 0
         else:
             # Increment bow animation counter
-            self.bow_animation_counter = (self.bow_animation_counter + 1) % 150
+            if self.bow_animation_counter<50: 
+                self.bow_animation_counter = (self.bow_animation_counter + 1)
         
         self.archer.update_arrows()
         self.archer.aim_angle+=archer_action["move_angle"]
         #update pigion statement
+        pigeon_speed=3
+        if pigeon_action["direction"]=="L":
+            pigeon_action["move_vector"]=np.array([-pigeon_speed,0])
+        elif pigeon_action["direction"]=="R":
+            pigeon_action["move_vector"]=np.array([pigeon_speed,0])
+        elif pigeon_action["direction"]=="D":
+            pigeon_action["move_vector"]=np.array([0,-pigeon_speed])
+        elif pigeon_action["direction"]=="U":
+                pigeon_action["move_vector"]=np.array([0,pigeon_speed])
         self.pigeon.move(vec=pigeon_action["move_vector"])
         #write result of this frame
         observed_data=  {
@@ -135,6 +135,15 @@ class Game:
             observed_data["env"]["game_state"]="archer win"
         #render if True
         if self.render:
+            if self.bow_animation_counter < 20 and self.bow_animation_counter != 0:
+                # none_draw_bow (index 0) for first 120 frames
+                self.archer.bow.set_image(0)
+            elif self.bow_animation_counter < 40 and self.bow_animation_counter != 0:
+                # half_draw_bow (index 1) for next 20 frames (120-139)
+                self.archer.bow.set_image(1)
+            elif self.bow_animation_counter < 50 or self.bow_animation_counter == 0:
+                # full_draw_bow (index 2) for last 10 frames (140-149)
+                self.archer.bow.set_image(2)
             self.background.display(self.screen)
             self.archer.display(self.screen, self.HEIGHT)
             self.pigeon.display(self.screen, self.HEIGHT)
@@ -147,31 +156,3 @@ class Game:
     def close(self):
         if (self.render):
             pygame.quit()
-game = Game(render=True)
-game.reset()
-i = 0
-while(1):
-    if i%150==0:
-        result=game.next_step(
-            archer_action = {   
-                "shoot":True,                     
-                "move_angle":0.1              
-            }, 
-            pigeon_action = {   
-                "move_vector":np.array([0,0])
-            })
-    else:
-        result=game.next_step(
-            archer_action = {   
-                "shoot":False,                     
-                "move_angle":0.1              
-            }, 
-            pigeon_action = {   
-                "move_vector":np.array([1,1])
-            })
-    print(i, result)
-    if(result["env"]["game_state"]!="continue"):
-        break
-    
-    i+=1
-game.close()
