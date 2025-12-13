@@ -1,0 +1,802 @@
+[
+  {
+    "episode": 780,
+    "adjustment": 14.1135473613565,
+    "pigeon_y": 274.0,
+    "predicted_movement": -79.53179315499544,
+    "angle": 14.97771392589826,
+    "success": true
+  },
+  {
+    "episode": 791,
+    "adjustment": 14.114122990968815,
+    "pigeon_y": 368.0,
+    "predicted_movement": 84.62980610655241,
+    "angle": 37.771763966708946,
+    "success": true
+  },
+  {
+    "episode": 793,
+    "adjustment": 14.114166283028368,
+    "pigeon_y": 296.0,
+    "predicted_movement": -79.16812386772024,
+    "angle": 17.64457596830751,
+    "success": true
+  },
+  {
+    "episode": 794,
+    "adjustment": 14.114166283028368,
+    "pigeon_y": 330.0,
+    "predicted_movement": 82.79850141599601,
+    "angle": 34.56764186557389,
+    "success": true
+  },
+  {
+    "episode": 795,
+    "adjustment": 14.114166283028368,
+    "pigeon_y": 318.0,
+    "predicted_movement": 81.52876041931586,
+    "angle": 33.765341247586,
+    "success": true
+  },
+  {
+    "episode": 796,
+    "adjustment": 14.114166283028368,
+    "pigeon_y": 300.0,
+    "predicted_movement": -82.01244305790757,
+    "angle": 17.128156333402817,
+    "success": true
+  },
+  {
+    "episode": 797,
+    "adjustment": 14.114166283028368,
+    "pigeon_y": 300.0,
+    "predicted_movement": -81.75074111877755,
+    "angle": 17.215797038474566,
+    "success": true
+  },
+  {
+    "episode": 798,
+    "adjustment": 14.114166283028368,
+    "pigeon_y": 294.0,
+    "predicted_movement": -81.67281665028968,
+    "angle": 16.563373430923136,
+    "success": true
+  },
+  {
+    "episode": 802,
+    "adjustment": 14.114252579452275,
+    "pigeon_y": 322.0,
+    "predicted_movement": 84.35348365113104,
+    "angle": 33.27715555156344,
+    "success": true
+  },
+  {
+    "episode": 806,
+    "adjustment": 14.114318378585367,
+    "pigeon_y": 294.0,
+    "predicted_movement": -79.57489092236396,
+    "angle": 17.26846428471158,
+    "success": true
+  },
+  {
+    "episode": 809,
+    "adjustment": 14.11435088139841,
+    "pigeon_y": 298.0,
+    "predicted_movement": -76.68914192893227,
+    "angle": 18.797603157228398,
+    "success": true
+  },
+  {
+    "episode": 813,
+    "adjustment": 14.114384969073392,
+    "pigeon_y": 316.0,
+    "predicted_movement": 78.07113449166937,
+    "angle": 34.72207978840957,
+    "success": true
+  },
+  {
+    "episode": 814,
+    "adjustment": 14.114384969073392,
+    "pigeon_y": 266.0,
+    "predicted_movement": -69.85699678629193,
+    "angle": 17.384009066280186,
+    "success": true
+  },
+  {
+    "episode": 818,
+    "adjustment": 14.114392438399053,
+    "pigeon_y": 262.0,
+    "predicted_movement": -79.99234657268208,
+    "angle": 13.483583996126507,
+    "success": true
+  },
+  {
+    "episode": 821,
+    "adjustment": 14.114388840064302,
+    "pigeon_y": 288.0,
+    "predicted_movement": -78.4466541735236,
+    "angle": 16.95626977583074,
+    "success": true
+  },
+  {
+    "episode": 822,
+    "adjustment": 14.114388840064302,
+    "pigeon_y": 308.0,
+    "predicted_movement": 80.9182000667391,
+    "angle": 32.940143367140834,
+    "success": true
+  },
+  {
+    "episode": 823,
+    "adjustment": 14.114388840064302,
+    "pigeon_y": 298.0,
+    "predicted_movement": -82.94822579938227,
+    "angle": 16.597423095187192,
+    "success": true
+  },
+  {
+    "episode": 825,
+    "adjustment": 14.114373683635964,
+    "pigeon_y": 312.0,
+    "predicted_movement": 82.45468761813413,
+    "angle": 32.867479119078695,
+    "success": true
+  },
+  {
+    "episode": 826,
+    "adjustment": 14.114373683635964,
+    "pigeon_y": 300.0,
+    "predicted_movement": -83.06083337419825,
+    "angle": 16.78322649987196,
+    "success": true
+  },
+  {
+    "episode": 833,
+    "adjustment": 14.11424567709803,
+    "pigeon_y": 262.0,
+    "predicted_movement": -78.91974740590751,
+    "angle": 13.795983237071106,
+    "success": true
+  },
+  {
+    "episode": 834,
+    "adjustment": 14.11424567709803,
+    "pigeon_y": 320.0,
+    "predicted_movement": 81.39648490630317,
+    "angle": 34.01248656352395,
+    "success": true
+  },
+  {
+    "episode": 835,
+    "adjustment": 14.11424567709803,
+    "pigeon_y": 308.0,
+    "predicted_movement": 80.65902027064554,
+    "angle": 33.021764380118306,
+    "success": true
+  },
+  {
+    "episode": 836,
+    "adjustment": 14.11424567709803,
+    "pigeon_y": 288.0,
+    "predicted_movement": -70.14911231928508,
+    "angle": 20.208791178148466,
+    "success": true
+  },
+  {
+    "episode": 837,
+    "adjustment": 14.11424567709803,
+    "pigeon_y": 314.0,
+    "predicted_movement": 83.87210866697521,
+    "angle": 32.63646932058144,
+    "success": true
+  },
+  {
+    "episode": 841,
+    "adjustment": 14.114123735404652,
+    "pigeon_y": 292.0,
+    "predicted_movement": -77.10951660476421,
+    "angle": 17.909800002477574,
+    "success": true
+  },
+  {
+    "episode": 842,
+    "adjustment": 14.114123735404652,
+    "pigeon_y": 308.0,
+    "predicted_movement": 84.04177775465762,
+    "angle": 31.998176329443766,
+    "success": true
+  },
+  {
+    "episode": 844,
+    "adjustment": 14.114077781540706,
+    "pigeon_y": 318.0,
+    "predicted_movement": 84.62980610655241,
+    "angle": 32.80199725741489,
+    "success": true
+  },
+  {
+    "episode": 846,
+    "adjustment": 14.114029809048123,
+    "pigeon_y": 394.0,
+    "predicted_movement": 89.71838025233203,
+    "angle": 38.49268642747879,
+    "success": true
+  },
+  {
+    "episode": 847,
+    "adjustment": 14.114029809048123,
+    "pigeon_y": 254.0,
+    "predicted_movement": -81.22782271902572,
+    "angle": 12.257623105274773,
+    "success": true
+  },
+  {
+    "episode": 850,
+    "adjustment": 14.113925439817628,
+    "pigeon_y": 314.0,
+    "predicted_movement": 76.92243641805554,
+    "angle": 34.91474882244089,
+    "success": true
+  },
+  {
+    "episode": 852,
+    "adjustment": 14.113873205608341,
+    "pigeon_y": 244.0,
+    "predicted_movement": -79.96172553803731,
+    "angle": 11.491263423161852,
+    "success": true
+  },
+  {
+    "episode": 853,
+    "adjustment": 14.113873205608341,
+    "pigeon_y": 316.0,
+    "predicted_movement": 82.1789982605169,
+    "angle": 33.35513202393941,
+    "success": true
+  },
+  {
+    "episode": 858,
+    "adjustment": 14.1136612046447,
+    "pigeon_y": 330.0,
+    "predicted_movement": 76.73170858283306,
+    "angle": 36.74058545553482,
+    "success": true
+  },
+  {
+    "episode": 859,
+    "adjustment": 14.1136612046447,
+    "pigeon_y": 318.0,
+    "predicted_movement": 81.52876041931586,
+    "angle": 33.76530233807139,
+    "success": true
+  },
+  {
+    "episode": 860,
+    "adjustment": 14.1136612046447,
+    "pigeon_y": 312.0,
+    "predicted_movement": 81.93626193821733,
+    "angle": 33.02773433949867,
+    "success": true
+  },
+  {
+    "episode": 861,
+    "adjustment": 14.1136612046447,
+    "pigeon_y": 312.0,
+    "predicted_movement": 83.75376933339192,
+    "angle": 32.47495321546405,
+    "success": true
+  },
+  {
+    "episode": 862,
+    "adjustment": 14.1136612046447,
+    "pigeon_y": 330.0,
+    "predicted_movement": 83.30960206313776,
+    "angle": 34.400179622422975,
+    "success": true
+  },
+  {
+    "episode": 863,
+    "adjustment": 14.1136612046447,
+    "pigeon_y": 278.0,
+    "predicted_movement": -78.94818760763677,
+    "angle": 15.622058416361133,
+    "success": true
+  },
+  {
+    "episode": 868,
+    "adjustment": 14.113431387510158,
+    "pigeon_y": 252.0,
+    "predicted_movement": -80.32434251209281,
+    "angle": 12.278853142866462,
+    "success": true
+  },
+  {
+    "episode": 871,
+    "adjustment": 14.113330646231608,
+    "pigeon_y": 286.0,
+    "predicted_movement": -81.23184255510864,
+    "angle": 15.803881821022008,
+    "success": true
+  },
+  {
+    "episode": 872,
+    "adjustment": 14.113330646231608,
+    "pigeon_y": 270.0,
+    "predicted_movement": -80.65851423357206,
+    "angle": 14.184729472974936,
+    "success": true
+  },
+  {
+    "episode": 873,
+    "adjustment": 14.113330646231608,
+    "pigeon_y": 328.0,
+    "predicted_movement": 82.92657189665212,
+    "angle": 34.32405162068118,
+    "success": true
+  },
+  {
+    "episode": 882,
+    "adjustment": 14.112991419967429,
+    "pigeon_y": 308.0,
+    "predicted_movement": 83.78056859122758,
+    "angle": 32.07401827355445,
+    "success": true
+  },
+  {
+    "episode": 883,
+    "adjustment": 14.112991419967429,
+    "pigeon_y": 298.0,
+    "predicted_movement": -81.11267044132161,
+    "angle": 17.20336150790912,
+    "success": true
+  },
+  {
+    "episode": 888,
+    "adjustment": 14.112862878634814,
+    "pigeon_y": 328.0,
+    "predicted_movement": 84.98018976832908,
+    "angle": 33.672282040888085,
+    "success": true
+  },
+  {
+    "episode": 891,
+    "adjustment": 14.11280732623455,
+    "pigeon_y": 296.0,
+    "predicted_movement": -83.09964512805193,
+    "angle": 16.32715487661231,
+    "success": true
+  },
+  {
+    "episode": 892,
+    "adjustment": 14.11280732623455,
+    "pigeon_y": 304.0,
+    "predicted_movement": 81.46064531228487,
+    "angle": 32.366322679711445,
+    "success": true
+  },
+  {
+    "episode": 896,
+    "adjustment": 14.112733399646844,
+    "pigeon_y": 274.0,
+    "predicted_movement": -80.59624744391525,
+    "angle": 14.651373466576043,
+    "success": true
+  },
+  {
+    "episode": 899,
+    "adjustment": 14.112690350381325,
+    "pigeon_y": 314.0,
+    "predicted_movement": 76.41348315685697,
+    "angle": 35.09901463107164,
+    "success": true
+  },
+  {
+    "episode": 901,
+    "adjustment": 14.112670730458461,
+    "pigeon_y": 264.0,
+    "predicted_movement": -81.9701289544937,
+    "angle": 13.148364710631917,
+    "success": true
+  },
+  {
+    "episode": 903,
+    "adjustment": 14.112652385882061,
+    "pigeon_y": 316.0,
+    "predicted_movement": 84.2508402428881,
+    "angle": 32.719495851191716,
+    "success": true
+  },
+  {
+    "episode": 908,
+    "adjustment": 14.112588790575808,
+    "pigeon_y": 242.0,
+    "predicted_movement": -77.43067999237532,
+    "angle": 11.938963880081943,
+    "success": true
+  },
+  {
+    "episode": 914,
+    "adjustment": 14.112526765725312,
+    "pigeon_y": 288.0,
+    "predicted_movement": -76.87625890789346,
+    "angle": 17.511572971595086,
+    "success": true
+  },
+  {
+    "episode": 916,
+    "adjustment": 14.112516868653588,
+    "pigeon_y": 284.0,
+    "predicted_movement": -81.38846129921035,
+    "angle": 15.52989227724255,
+    "success": true
+  },
+  {
+    "episode": 919,
+    "adjustment": 14.112500249327232,
+    "pigeon_y": 304.0,
+    "predicted_movement": 81.7212784220779,
+    "angle": 32.287378444068615,
+    "success": true
+  },
+  {
+    "episode": 922,
+    "adjustment": 14.112486949180363,
+    "pigeon_y": 260.0,
+    "predicted_movement": -75.87799014045576,
+    "angle": 14.495687901012936,
+    "success": true
+  },
+  {
+    "episode": 925,
+    "adjustment": 14.112476631625341,
+    "pigeon_y": 314.0,
+    "predicted_movement": 82.57488870654298,
+    "angle": 33.03058254231748,
+    "success": true
+  },
+  {
+    "episode": 929,
+    "adjustment": 14.112465461783174,
+    "pigeon_y": 316.0,
+    "predicted_movement": 78.07113449166937,
+    "angle": 34.721927538398276,
+    "success": true
+  },
+  {
+    "episode": 930,
+    "adjustment": 14.112465461783174,
+    "pigeon_y": 320.0,
+    "predicted_movement": 83.19831238476817,
+    "angle": 33.43625006881621,
+    "success": true
+  },
+  {
+    "episode": 931,
+    "adjustment": 14.112465461783174,
+    "pigeon_y": 312.0,
+    "predicted_movement": 84.2745755351675,
+    "angle": 32.321114339271595,
+    "success": true
+  },
+  {
+    "episode": 933,
+    "adjustment": 14.112464665817049,
+    "pigeon_y": 294.0,
+    "predicted_movement": -80.36041263188827,
+    "angle": 16.999494337110217,
+    "success": true
+  },
+  {
+    "episode": 935,
+    "adjustment": 14.112464763034485,
+    "pigeon_y": 288.0,
+    "predicted_movement": -77.39904550379131,
+    "angle": 17.32386035326256,
+    "success": true
+  },
+  {
+    "episode": 937,
+    "adjustment": 14.112465708824914,
+    "pigeon_y": 276.0,
+    "predicted_movement": -80.96610527919465,
+    "angle": 14.763755980533647,
+    "success": true
+  },
+  {
+    "episode": 938,
+    "adjustment": 14.112465708824914,
+    "pigeon_y": 302.0,
+    "predicted_movement": 79.26190118582721,
+    "angle": 32.8456423152075,
+    "success": true
+  },
+  {
+    "episode": 942,
+    "adjustment": 14.11247314333681,
+    "pigeon_y": 304.0,
+    "predicted_movement": 82.76546652426718,
+    "angle": 31.976450631786957,
+    "success": true
+  },
+  {
+    "episode": 943,
+    "adjustment": 14.11247314333681,
+    "pigeon_y": 304.0,
+    "predicted_movement": 82.76546652426718,
+    "angle": 31.976450631786957,
+    "success": true
+  },
+  {
+    "episode": 944,
+    "adjustment": 14.11247314333681,
+    "pigeon_y": 306.0,
+    "predicted_movement": 80.0204055608471,
+    "angle": 33.01854533120432,
+    "success": true
+  },
+  {
+    "episode": 945,
+    "adjustment": 14.11247314333681,
+    "pigeon_y": 304.0,
+    "predicted_movement": 82.24304449220577,
+    "angle": 32.13097055094175,
+    "success": true
+  },
+  {
+    "episode": 946,
+    "adjustment": 14.11247314333681,
+    "pigeon_y": 274.0,
+    "predicted_movement": -73.9817958855351,
+    "angle": 16.84607833933336,
+    "success": true
+  },
+  {
+    "episode": 948,
+    "adjustment": 14.112482079917672,
+    "pigeon_y": 288.0,
+    "predicted_movement": -79.75984361231676,
+    "angle": 16.510134819218482,
+    "success": true
+  },
+  {
+    "episode": 949,
+    "adjustment": 14.112482079917672,
+    "pigeon_y": 304.0,
+    "predicted_movement": 83.28853217482425,
+    "angle": 31.823785766955627,
+    "success": true
+  },
+  {
+    "episode": 950,
+    "adjustment": 14.112482079917672,
+    "pigeon_y": 258.0,
+    "predicted_movement": -76.57835789542096,
+    "angle": 14.039909069945509,
+    "success": true
+  },
+  {
+    "episode": 952,
+    "adjustment": 14.112494956075746,
+    "pigeon_y": 396.0,
+    "predicted_movement": 88.16172523220247,
+    "angle": 39.25972043455831,
+    "success": true
+  },
+  {
+    "episode": 953,
+    "adjustment": 14.112494956075746,
+    "pigeon_y": 268.0,
+    "predicted_movement": -72.06856146073964,
+    "angle": 16.794802580190137,
+    "success": true
+  },
+  {
+    "episode": 954,
+    "adjustment": 14.112494956075746,
+    "pigeon_y": 292.0,
+    "predicted_movement": -81.56129534257768,
+    "angle": 16.374031415990757,
+    "success": true
+  },
+  {
+    "episode": 955,
+    "adjustment": 14.112494956075746,
+    "pigeon_y": 302.0,
+    "predicted_movement": 80.30147277984535,
+    "angle": 32.51862199492182,
+    "success": true
+  },
+  {
+    "episode": 956,
+    "adjustment": 14.112494956075746,
+    "pigeon_y": 286.0,
+    "predicted_movement": -77.28452600089926,
+    "angle": 17.125159257681734,
+    "success": true
+  },
+  {
+    "episode": 958,
+    "adjustment": 14.112514237164856,
+    "pigeon_y": 306.0,
+    "predicted_movement": 82.88127727327192,
+    "angle": 32.1407427112258,
+    "success": true
+  },
+  {
+    "episode": 961,
+    "adjustment": 14.11255247929734,
+    "pigeon_y": 256.0,
+    "predicted_movement": -73.00712853089438,
+    "angle": 14.950754629617922,
+    "success": true
+  },
+  {
+    "episode": 963,
+    "adjustment": 14.112571491977112,
+    "pigeon_y": 300.0,
+    "predicted_movement": -79.14285714285714,
+    "angle": 18.12435130354918,
+    "success": true
+  },
+  {
+    "episode": 967,
+    "adjustment": 14.112626787656888,
+    "pigeon_y": 284.0,
+    "predicted_movement": -78.22155869642306,
+    "angle": 16.562631125834507,
+    "success": true
+  },
+  {
+    "episode": 970,
+    "adjustment": 14.112661721542626,
+    "pigeon_y": 268.0,
+    "predicted_movement": -81.62882644092373,
+    "angle": 13.68194975501465,
+    "success": true
+  },
+  {
+    "episode": 973,
+    "adjustment": 14.112695807921934,
+    "pigeon_y": 306.0,
+    "predicted_movement": 78.72711847688488,
+    "angle": 33.437617119552435,
+    "success": true
+  },
+  {
+    "episode": 974,
+    "adjustment": 14.112695807921934,
+    "pigeon_y": 306.0,
+    "predicted_movement": 83.40361662006104,
+    "angle": 31.987349195392195,
+    "success": true
+  },
+  {
+    "episode": 975,
+    "adjustment": 14.112695807921934,
+    "pigeon_y": 260.0,
+    "predicted_movement": -71.3633988391637,
+    "angle": 16.0312712468569,
+    "success": true
+  },
+  {
+    "episode": 977,
+    "adjustment": 14.112715168288826,
+    "pigeon_y": 296.0,
+    "predicted_movement": -81.52275255211559,
+    "angle": 16.83857600585419,
+    "success": true
+  },
+  {
+    "episode": 980,
+    "adjustment": 14.112753251233082,
+    "pigeon_y": 298.0,
+    "predicted_movement": -74.62614303640377,
+    "angle": 19.613753680394908,
+    "success": true
+  },
+  {
+    "episode": 984,
+    "adjustment": 14.112806826818819,
+    "pigeon_y": 312.0,
+    "predicted_movement": 81.67731431351908,
+    "angle": 33.10855082489916,
+    "success": true
+  },
+  {
+    "episode": 985,
+    "adjustment": 14.112806826818819,
+    "pigeon_y": 298.0,
+    "predicted_movement": -78.7644382617808,
+    "angle": 18.024637055897426,
+    "success": true
+  },
+  {
+    "episode": 986,
+    "adjustment": 14.112806826818819,
+    "pigeon_y": 310.0,
+    "predicted_movement": 81.81612036157915,
+    "angle": 32.863154061090526,
+    "success": true
+  },
+  {
+    "episode": 989,
+    "adjustment": 14.11284374743615,
+    "pigeon_y": 330.0,
+    "predicted_movement": 73.25716514374521,
+    "angle": 38.16398207522475,
+    "success": true
+  },
+  {
+    "episode": 990,
+    "adjustment": 14.11284374743615,
+    "pigeon_y": 304.0,
+    "predicted_movement": 79.38179506508467,
+    "angle": 33.01544658886556,
+    "success": true
+  },
+  {
+    "episode": 995,
+    "adjustment": 14.112912015577265,
+    "pigeon_y": 318.0,
+    "predicted_movement": 82.04379119390686,
+    "angle": 33.59987154677939,
+    "success": true
+  },
+  {
+    "episode": 996,
+    "adjustment": 14.112912015577265,
+    "pigeon_y": 316.0,
+    "predicted_movement": 84.2508402428881,
+    "angle": 32.71951549572287,
+    "success": true
+  },
+  {
+    "episode": 997,
+    "adjustment": 14.112912015577265,
+    "pigeon_y": 306.0,
+    "predicted_movement": 82.09899450029327,
+    "angle": 32.374378087238526,
+    "success": true
+  },
+  {
+    "episode": 1,
+    "adjustment": 14.11323445396915,
+    "pigeon_y": 300.0,
+    "predicted_movement": -81.22782271902572,
+    "angle": 17.39270461001868,
+    "success": true
+  },
+  {
+    "episode": 3,
+    "adjustment": 14.113234659335825,
+    "pigeon_y": 260.0,
+    "predicted_movement": -79.08920306095091,
+    "angle": 13.519071334888453,
+    "success": true
+  },
+  {
+    "episode": 4,
+    "adjustment": 14.113234659335825,
+    "pigeon_y": 316.0,
+    "predicted_movement": 82.1789982605169,
+    "angle": 33.35508293601081,
+    "success": true
+  },
+  {
+    "episode": 6,
+    "adjustment": 14.113235161941088,
+    "pigeon_y": 356.0,
+    "predicted_movement": 84.78014784952758,
+    "angle": 36.50808912263819,
+    "success": true
+  },
+  {
+    "episode": 8,
+    "adjustment": 14.113235741704951,
+    "pigeon_y": 314.0,
+    "predicted_movement": 82.05722244325626,
+    "angle": 33.1916666736003,
+    "success": true
+  }
+]

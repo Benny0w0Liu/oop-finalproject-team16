@@ -1,0 +1,82 @@
+[
+  {
+    "episode": 1,
+    "pigeon_y": 270.0,
+    "bow_angle": 14.69999860399357,
+    "adjustment": 14.11323445396915,
+    "success": true,
+    "game_state": "archer win"
+  },
+  {
+    "episode": 2,
+    "pigeon_y": 348.0,
+    "bow_angle": 36.04911945741701,
+    "adjustment": 14.11323445396915,
+    "success": false,
+    "game_state": "pigeon win"
+  },
+  {
+    "episode": 3,
+    "pigeon_y": 230.0,
+    "bow_angle": 10.705427953575398,
+    "adjustment": 14.113234659335825,
+    "success": true,
+    "game_state": "archer win"
+  },
+  {
+    "episode": 4,
+    "pigeon_y": 316.0,
+    "bow_angle": 33.51795013431935,
+    "adjustment": 14.113234659335825,
+    "success": true,
+    "game_state": "archer win"
+  },
+  {
+    "episode": 5,
+    "pigeon_y": 230.0,
+    "bow_angle": 10.705427953575398,
+    "adjustment": 14.113234659335825,
+    "success": false,
+    "game_state": "pigeon win"
+  },
+  {
+    "episode": 6,
+    "pigeon_y": 356.0,
+    "bow_angle": 36.355645550511774,
+    "adjustment": 14.113235161941088,
+    "success": true,
+    "game_state": "archer win"
+  },
+  {
+    "episode": 7,
+    "pigeon_y": 294.0,
+    "bow_angle": 16.63259925470826,
+    "adjustment": 14.113235161941088,
+    "success": false,
+    "game_state": "pigeon win"
+  },
+  {
+    "episode": 8,
+    "pigeon_y": 320.0,
+    "bow_angle": 33.842036540322866,
+    "adjustment": 14.113235741704951,
+    "success": true,
+    "game_state": "archer win"
+  },
+  {
+    "episode": 9,
+    "pigeon_y": 332.0,
+    "bow_angle": 34.80110645004935,
+    "adjustment": 14.113235741704951,
+    "success": false,
+    "game_state": "pigeon win"
+  },
+  {
+    "episode": 10,
+    "pigeon_y": 236.0,
+    "bow_angle": 11.314891443302646,
+    "adjustment": 14.113236299887415,
+    "success": false,
+    "game_state": "pigeon win"
+  }
+]
