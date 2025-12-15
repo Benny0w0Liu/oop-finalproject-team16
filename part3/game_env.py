@@ -1,5 +1,4 @@
 import pygame
-import random
 import numpy as np
 from Archer_Pippy import Field, Arrow, Archer, Pigeon, Bow
 """

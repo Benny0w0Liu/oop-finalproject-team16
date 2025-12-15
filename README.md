@@ -144,6 +144,12 @@ Save Q-table to disk
 
     * The goal may be many steps away.
     * Encourages planning ahead rather than greedy local moves.
+
+## How to run
+```
+cd part2\john
+python john_version.py
+```
 ### Result
 1. Terminal output:
     ```
@@ -153,26 +159,114 @@ Save Q-table to disk
     ![frozen_lake8x8_train.png](./part2/john/frozen_lake8x8_train.png)
 3. frozen_lake8x8_eval.png:
     ![frozen_lake8x8_eval.png](./part2/john/frozen_lake8x8_eval.png)
-## How to run
-```
-cd part2\john
-python john_version.py
-```
-
 ## Dependencies
-
+![part2dependency](images/part2dependency.svg)
 ## Contribution list
+Each of us make our own version, then we choose the best performence one.
+1. benny(version of B123245013 劉邦均): 
+    * Success Rate $\approx 55\%$
+2. john(version of B123045009 陳予涵): 
+    * Success Rate $\approx 62\%$
+3. kate(version of B123040027 林昱辰): 
+    * Success Rate $\approx 58\%$
 
+We use second one as the final strategy.
 # Part 3
 ## Project overview
-> **Goal**: Revise the sample code to achieve a consistent success rate > 0.70 on without
-changing `num_episodes`and `max_steps_per_episode`
+In part3, We build a game: ***Archer v.s. Piggy*** and agents to play the game.
 
-For this part, we try to achieve the goal with two different strategy.
+There are 3 parts in this project:
+1. `Archer_Pippy.py` -> Build elements
+2. `game_env.py` -> Set rules, movement input, output
+3. `main.py` -> make agents
+Below is a **clean, report-ready project overview section** that matches your structure and terminology and is appropriate for an academic or course submission. The language is concise, technical, and consistent with your codebase.
 
-1. Adjust 
-2. 
+---
+
+## Project Overview
+
+In Part 3, we build a game called ***Archer v.s. Piggy*** and design agents to autonomously play the game.
+The project is modularized into three major components to clearly separate **game elements**, **environment logic**, and **agent intelligence**.
+
+There are three main parts in this project:
+
+1. `Archer_Pippy.py` → Build elements
+2. `game_env.py` → Set rules, movement input, output
+3. `main.py` → Implement agents and training/testing loop
+
+---
+
+## Build Elements (`Archer_Pippy.py`)
+
+This module defines all **core game entities**, including their visual representation, physical properties, and interactions with the environment.
+It serves as the **domain layer** of the game and is independent of game rules and agent logic.
+
+Key responsibilities include:
+
+* **Rendering abstraction**
+
+  * `RenderBasicInfo` defines a common interface for all renderable objects.
+  * Ensures consistent handling of display, image updates, position, and rotation.
+
+* **Physics and collision**
+
+  * `Hitbox` manages object position, size, movement, and boundary checking.
+  * Provides collision scope calculation for hit detection.
+
+* **Game entities**
+
+  * `Field`: Background rendering.
+  * `Bow`: Handles bow rotation and animation states.
+  * `Arrow`: Implements projectile physics with gravity and rotation based on velocity.
+  * `Archer`: Combines character rendering, bow control, arrow management, and shooting cooldown.
+  * `Pigeon`: Target entity with animation and movement.
+
+This module focuses on **what the objects are** and **how they behave visually and physically**, without embedding game rules or decision logic.
+
+## Set Rules, Movement Input, Output (`game_env.py`)
+
+This module defines the **game environment and rules**, acting as the controller between game elements and external agents.
+
+Key responsibilities include:
+
+* **Environment initialization**
+  * Creates and resets the game state, including the archer, pigeon, arrows, background, and screen settings.
+  * Configures gravity, screen dimensions, and total frame limits.
+
+* **Game loop logic**
+  * `next_step()` advances the game by one frame.
+  * Accepts structured inputs from agents:
+    * Archer actions (shooting and bow angle adjustment)
+    * Pigeon actions (movement direction and speed)
+  * Updates all entity states, including arrow physics and pigeon movement.
+
+* **Rule enforcement**
+  * Determines win/lose conditions:
+    * Archer wins if any arrow hits the pigeon.
+    * Pigeon wins if all arrows miss or time runs out.
+  * Handles shooting cooldowns and animation timing.
+
+* **Observation output**
+  * Returns a structured observation dictionary containing:
+
+    * Environment state (frame count, game state)
+    * Archer state (bow angle, remaining arrows, cooldown)
+    * Pigeon state (position)
+
+* **Rendering control**
+  * Optionally renders each frame using Pygame when `render=True`.
+  * Keeps rendering logic separate from agent decision-making.
+
+This module acts as a **bridge between low-level game mechanics and high-level agent control**, exposing a clean step-based interface for training and evaluation.
+### make agents(`main.py`)
 
 ## How to run
+
 ## Dependencies
+1.  rough graph
+    ![part3dependency](images/part3dependency.svg)
+2. Archer_piggy <-> game_env
+    ![Archer_piggy <-> game_env](images/part1.svg)
+3. game_env <-> main
+    ![game_env <-> main](images/part2.svg)
 ## Contribution list
