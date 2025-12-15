@@ -258,9 +258,61 @@ Key responsibilities include:
   * Keeps rendering logic separate from agent decision-making.
 
 This module acts as a **bridge between low-level game mechanics and high-level agent control**, exposing a clean step-based interface for training and evaluation.
-### make agents(`main.py`)
+
+## Make Agents (`main.py`)
+Key responsibilities include:
+* **Agent architecture**
+
+  * `ArcherAgent`: Learns to predict pigeon movement and adjust aim compensation for gravity.
+  * `PigeonAgent`: Supports three modes
+    * `up_down_agent`: Simple vertical patrol (baseline).
+    * `random_agent`: Random direction changes with boundary avoidance.
+    * `learnt_agent`: Danger prediction and evasion based on bow angle and distance.
+
+* **Learning mechanisms**
+
+  * **ArcherAgent** uses **experience replay** with parameter averaging:
+    * Records successful shots (adjustment, angle, predicted movement).
+    * On failure, converges toward average of successful cases.
+    * Stores data to `dataset/successful_history` (retains last 100 entries).
+  
+  * **PigeonAgent** uses **strategy-based learning**:
+    * Evaluates danger zones using predicted aim line: `archer_y + dx × tan(bow_angle)`.
+    * Learns safe Y-range (`safe_y_min`, `safe_y_max`) and `danger_threshold` via trial and error.
+    * Retains last 50 successful survival strategies.
+
+* **Training pipeline**
+
+  * Three-stage training process:
+    1. **Stage 1** (optional): Train Archer vs Random Pigeon.
+    2. **Stage 2**: Train Learnt Pigeon vs Trained Archer.
+    3. **Stage 2.5**: Re-train Archer vs improved opponents.
+    4. **Stage 3**: Test with both agents using learned parameters (`render=True`).
+
+  * Progress monitoring:
+    * Outputs success rate every 10 episodes.
+    * Records win/loss statistics during testing.
+
+* **Data persistence**
+
+  * Saves training artifacts to JSON files:
+    * `dataset/successful_history`: Archer's successful shots.
+    * `dataset/history`: Recent 10 episodes for debugging.
+  * Loads pre-trained parameters when `train=False`.
 
 ## How to run
+```
+cd part3
+python main.py
+```
+### Result
+Terminal output:
+
+    === Test Results ===
+    Total Episodes: 10
+    Archer Wins: 3 (30.0%)
+    Pigeon Wins: 7 (70.0%)
+    Win Rate - Archer: 3/10, Pigeon: 7/10
 
 ## Dependencies
 1.  rough graph
@@ -270,3 +322,24 @@ This module acts as a **bridge between low-level game mechanics and high-level a
 3. game_env <-> main
     ![game_env <-> main](images/part2.svg)
 ## Contribution list
+* 陳予涵 
+    * Archer_Pippy.py
+        * Bow animation
+    * main.py
+        * run() update
+        * archer-train architecture
+        * ArcherAgent complete
+* 林昱辰 
+    * Archer_Pippy.py
+        * Bow rotation()
+    * main.py
+        * run() update
+        * multi-train architecture 
+        * PigeonAgent complete
+* 劉邦均 
+    * game_env.py 
+    * Archer_Pippy.py 
+    * main.py
+        * run() architecture
+        * PigeonAgent class architecture
+        * ArcherAgent class architecture
