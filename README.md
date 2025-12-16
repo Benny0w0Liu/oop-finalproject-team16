@@ -299,7 +299,11 @@ Key responsibilities include:
     * `dataset/successful_history`: Archer's successful shots.
     * `dataset/history`: Recent 10 episodes for debugging.
   * Loads pre-trained parameters when `train=False`.
-
+### UML diagrame
+1. Archer_piggy <-> game_env
+    ![Archer_piggy <-> game_env](images/part1.svg)
+2. game_env <-> main
+    ![game_env <-> main](images/part2.svg)
 ## How to run
 ```
 cd part3
@@ -315,12 +319,8 @@ Terminal output:
     Win Rate - Archer: 3/10, Pigeon: 7/10
 
 ## Dependencies
-1.  rough graph
+* rough graph
     ![part3dependency](images/part3dependency.svg)
-2. Archer_piggy <-> game_env
-    ![Archer_piggy <-> game_env](images/part1.svg)
-3. game_env <-> main
-    ![game_env <-> main](images/part2.svg)
 ## Contribution list
 * 陳予涵 
     * Archer_Pippy.py
@@ -343,3 +343,4 @@ Terminal output:
         * run() architecture
         * PigeonAgent class architecture
         * ArcherAgent class architecture
+
