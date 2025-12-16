@@ -299,7 +299,7 @@ Key responsibilities include:
     * `dataset/successful_history`: Archer's successful shots.
     * `dataset/history`: Recent 10 episodes for debugging.
   * Loads pre-trained parameters when `train=False`.
-### UML diagrame
+### UML diagram
 1. Archer_piggy <-> game_env
     ![Archer_piggy <-> game_env](images/part1.svg)
 2. game_env <-> main
